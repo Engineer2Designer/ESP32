@@ -30,7 +30,7 @@
 //#define BOARD_PROTONEER_3XX           //
 //#define BOARD_FYSETC_E4               //
 //#define BOARD_XPRO_V5                 //
-//#define BOARD_MKS_DLC32_V2P0          //
+#define BOARD_MKS_DLC32_V2P0          //
 //#define BOARD_MKS_DLC32_MAX_V1        // Has a ESP32-S3 MCU
 //#define BOARD_MKS_TINYBEE_V1          //
 //#define BOARD_CNC3040                 //
@@ -59,21 +59,21 @@
 // If none are specified the default PWM spindle is instantiated.
 // Spindle definitions can be found in grbl/spindle_control.h.
 // More here https://github.com/grblHAL/Plugins_spindle
-//#define SPINDLE0_ENABLE         SPINDLE_HUANYANG1
+#define SPINDLE0_ENABLE         SPINDLE_PWM0
 //#define SPINDLE1_ENABLE         SPINDLE_PWM0_NODIR
 //#define SPINDLE2_ENABLE         SPINDLE_NONE
 //#define SPINDLE3_ENABLE         SPINDLE_NONE
 //#define SPINDLE_OFFSET          1 // Uncomment to enable settings for laser spindle XY-offset.
 // **********************
 //#define MODBUS_ENABLE           1 // Set to 1 for auto direction, 2 for direction signal on auxiliary output pin.
-//#define WEBUI_ENABLE            3 // Enable ESP3D-WEBUI plugin along with networking and SD card plugins.
+#define WEBUI_ENABLE            3 // Enable ESP3D-WEBUI plugin along with networking and SD card plugins.
 //#define WEBUI_AUTH_ENABLE       1 // Enable ESP3D-WEBUI authentication.
-//#define WIFI_ENABLE             1 //
-//#define WIFI_SOFTAP             1 // Use Soft AP mode for WiFi.
+#define WIFI_ENABLE             1 //
+#define WIFI_SOFTAP             1 // Use Soft AP mode for WiFi.
 //#define ETHERNET_ENABLE         1 // Ethernet streaming. Uses networking plugin.
 //#define BLUETOOTH_ENABLE        1 // Set to 1 for native radio, 2 for HC-05 module.
-//#define SDCARD_ENABLE           1 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
-//#define LITTLEFS_ENABLE         1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
+#define SDCARD_ENABLE           1 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
+#define LITTLEFS_ENABLE         1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
 //#define MPG_ENABLE              1 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
                                     // 1: Mode switching is by handshake pin.
                                     // 2: Mode switching is by the CMD_MPG_ENABLE_TOGGLE (0x8B) command character.
@@ -104,7 +104,7 @@
 // Optional control signals:
 // These will be assigned to aux input pins. Use the $pins command to check which pins are assigned.
 // NOTE: If not enough pins are available assignment will silently fail.
-//#define PROBE_ENABLE            0 // Uncomment to disable probe input.
+#define PROBE_ENABLE              1 // Uncomment to disable probe input.
 //#define SAFETY_DOOR_ENABLE      1
 //#define MOTOR_FAULT_ENABLE      1
 //#define MOTOR_WARNING_ENABLE    1
@@ -131,35 +131,35 @@
 
 #if WIFI_ENABLE || ETHERNET_ENABLE || WEBUI_ENABLE
 #define TELNET_ENABLE         1 // Telnet daemon - requires WiFi streaming enabled.
-//#define WEBSOCKET_ENABLE      1 // Websocket daemon - requires WiFi streaming enabled.
-//#define MDNS_ENABLE           0 // mDNS daemon. Do NOT enable here, enable in CMakeLists.txt!
-//#define SSDP_ENABLE           1 // SSDP daemon - requires HTTP enabled.
-//#define MQTT_ENABLE           1 // MQTT client API, only enable if needed by plugin code.
+#define WEBSOCKET_ENABLE      1 // Websocket daemon - requires WiFi streaming enabled.
+#define MDNS_ENABLE           0 // mDNS daemon. Do NOT enable here, enable in CMakeLists.txt!
+#define SSDP_ENABLE           1 // SSDP daemon - requires HTTP enabled.
+// #define MQTT_ENABLE           1 // MQTT client API, only enable if needed by plugin code.
 #if SDCARD_ENABLE || WEBUI_ENABLE
 #define FTP_ENABLE            1 // Ftp daemon - requires SD card enabled.
-//#define HTTP_ENABLE           1 // http daemon - requires SD card enabled.
-//#define WEBDAV_ENABLE         1 // webdav protocol - requires http daemon and SD card enabled.
+#define HTTP_ENABLE           1 // http daemon - requires SD card enabled.
+#define WEBDAV_ENABLE         1 // webdav protocol - requires http daemon and SD card enabled.
 #endif
 // The following symbols have the default values as shown, uncomment and change as needed.
-//#define NETWORK_STA_HOSTNAME    "grblHAL"
-//#define NETWORK_STA_IPMODE      1 // 0 = static, 1 = DHCP, 2 = AutoIP
-//#define NETWORK_STA_IP          "192.168.5.1"
-//#define NETWORK_STA_GATEWAY     "192.168.5.1"
-//#define NETWORK_STA_MASK        "255.255.255.0"
+#define NETWORK_STA_HOSTNAME    "grblHAL"
+#define NETWORK_STA_IPMODE      1 // 0 = static, 1 = DHCP, 2 = AutoIP
+#define NETWORK_STA_IP          "192.168.5.1"
+#define NETWORK_STA_GATEWAY     "192.168.5.1"
+#define NETWORK_STA_MASK        "255.255.255.0"
 #if WIFI_SOFTAP
-//#define NETWORK_AP_SSID         "grblHAL_AP"
-//#define NETWORK_AP_PASSWORD     "grblHALap"
-//#define NETWORK_AP_HOSTNAME     "grblHAL_AP"
-//#define NETWORK_AP_IPMODE       0              // Do not change!
-//#define NETWORK_AP_IP           "192.168.4.1"  // Do not change!
-//#define NETWORK_AP_GATEWAY      "192.168.4.1"  // Do not change!
-//#define NETWORK_AP_MASK         "255.255.255.0"
+#define NETWORK_AP_SSID         "grblHAL_AP"
+#define NETWORK_AP_PASSWORD     "grblHALap"
+#define NETWORK_AP_HOSTNAME     "grblHAL_AP"
+#define NETWORK_AP_IPMODE       0              // Do not change!
+#define NETWORK_AP_IP           "192.168.4.1"  // Do not change!
+#define NETWORK_AP_GATEWAY      "192.168.4.1"  // Do not change!
+#define NETWORK_AP_MASK         "255.255.255.0"
 #endif
-//#define NETWORK_FTP_PORT     21
-//#define NETWORK_TELNET_PORT  23
-//#define NETWORK_HTTP_PORT    80
+#define NETWORK_FTP_PORT     21
+#define NETWORK_TELNET_PORT  23
+#define NETWORK_HTTP_PORT    80
 #if HTTP_ENABLE
-//#define NETWORK_WEBSOCKET_PORT  81
+#define NETWORK_WEBSOCKET_PORT  81
 #else
 //#define NETWORK_WEBSOCKET_PORT  80
 #endif // HTTP_ENABLE

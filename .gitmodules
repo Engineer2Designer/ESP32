@@ -1,6 +1,7 @@
 [submodule "main/grbl"]
 	path = main/grbl
-	url = https://github.com/grblHAL/core
+	url = https://github.com/Engineer2Designer/core
+	branch = e2d-master
 [submodule "main/eeprom"]
 	path = main/eeprom
 	url = https://github.com/grblHAL/Plugin_EEPROM
@@ -12,7 +13,8 @@
 	url = https://github.com/grblHAL/Plugins_motor
 [submodule "main/networking"]
 	path = main/networking
-	url = https://github.com/grblHAL/Plugin_networking
+	url = https://github.com/Engineer2Designer/Plugin_networking
+	branch = e2d-update
 [submodule "main/sdcard"]
 	path = main/sdcard
 	url = https://github.com/grblHAL/Plugin_SD_card
@@ -33,7 +35,8 @@
 	url = https://github.com/grblHAL/Plugin_embroidery
 [submodule "main/plugins"]
 	path = main/plugins
-	url = https://github.com/grblHAL/Plugins_misc/
+	url = https://github.com/Engineer2Designer/plugins
+	branch = e2d-update
 [submodule "main/openpnp"]
 	path = main/openpnp
 	url = https://github.com/grblHAL/Plugin_OpenPNP/

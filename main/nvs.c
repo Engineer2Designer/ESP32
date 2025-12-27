@@ -30,16 +30,16 @@
 #error NVSDATA_BUFFER_ENABLE must be enabled to use flash for settings storage
 #endif
 
-static const DRAM_ATTR char ESP_SPACE_CHAR = ' ';
-static const DRAM_ATTR char ESP_DEL_CHAR = 0x7F;
-static const DRAM_ATTR char ESP_CR = ASCII_CR;
-static const DRAM_ATTR char ESP_LF = ASCII_LF;
-static const DRAM_ATTR char ESP_QUESTION_MARK = '?';
+static const DRAM_ATTR uint8_t ESP_SPACE_CHAR = ' ';
+static const DRAM_ATTR uint8_t ESP_DEL_CHAR = 0x7F;
+static const DRAM_ATTR uint8_t ESP_CR = ASCII_CR;
+static const DRAM_ATTR uint8_t ESP_LF = ASCII_LF;
+static const DRAM_ATTR uint8_t ESP_QUESTION_MARK = '?';
 static const esp_partition_t *grblNVS = NULL;
 
 
 // Strip top bit set characters, control characters except CR and LF and question mark
-static IRAM_ATTR bool nvs_enqueue_realtime_command (char c)
+static IRAM_ATTR bool nvs_enqueue_realtime_command (uint8_t c)
 {
     return (c < ESP_SPACE_CHAR && !(c == ESP_CR || c == ESP_LF)) || c == ESP_QUESTION_MARK || c >= ESP_DEL_CHAR;
 }

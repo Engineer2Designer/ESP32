@@ -91,6 +91,7 @@
 #define AUXOUTPUT2_PIN      I2SO(17)   // Spindle enable, HE0
 #define AUXOUTPUT3_PIN      I2SO(19)   // Coolant flood, FAN1
 #define AUXOUTPUT4_PIN      I2SO(20)   // Coolant mist, FAN2
+#define AUXOUTPUT5_PIN      I2SO(21)   // MACROS 
 
 // Define driver spindle pins
 #if DRIVER_SPINDLE_ENABLE & SPINDLE_PWM
@@ -101,6 +102,10 @@
 #endif
 #if DRIVER_SPINDLE_ENABLE & SPINDLE_ENA
 #define SPINDLE_ENABLE_PIN      AUXOUTPUT2_PIN
+#endif
+
+#if RGB_LED_ENABLE
+#define LED_PIN                 GPIO_NUM_15 
 #endif
 
 // Define flood and mist coolant enable output pins.
@@ -138,6 +143,16 @@
 #if SAFETY_DOOR_ENABLE
 #define SAFETY_DOOR_PIN         AUXINPUT0_PIN // TB
 #endif
+
+
+#if I2C_ENABLE
+// Define I2C port/pins
+#define I2C_PORT            I2C_NUM_1
+#define I2C_SDA             GPIO_NUM_14
+#define I2C_SCL             GPIO_NUM_12
+#define I2C_CLOCK           100000
+#endif
+
 
 #if MPG_ENABLE == 1 && defined(AUXINPUT4_PIN)
 #define MPG_MODE_PIN            AUXINPUT4_PIN // EXP_1

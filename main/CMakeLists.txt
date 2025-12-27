@@ -237,6 +237,20 @@ set(USB_SOURCE
  usb_serial.c
 )
 
+set(PLUGIN_OLED_DISPLAY_SOURCE
+ plugins/plugin_oled_display/plugin_oled_display.c
+ plugins/plugin_oled_display/oled_display.c
+)
+
+set(STATUS_LIGHT_SOURCE
+ plugins/plugin_status_light/status_light.c
+)
+
+set(E2D_ATC_SOURCE
+ plugins/Plugin-e2d_atc/e2d_atc.c
+)
+
+
 if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/../3rdParty.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../3rdParty.cmake)
 endif()
@@ -262,6 +276,9 @@ list (APPEND SRCS ${LASER_SOURCE})
 list (APPEND SRCS ${MISC_PLUGINS_SOURCE})
 list (APPEND SRCS ${EMBROIDERY_SOURCE})
 list (APPEND SRCS ${OPENPNP_SOURCE})
+list (APPEND SRCS ${PLUGIN_OLED_DISPLAY_SOURCE})
+list (APPEND SRCS ${STATUS_LIGHT_SOURCE})
+list (APPEND SRCS ${E2D_ATC_SOURCE})
 
 if(Ethernet OR ETHERNET_ENABLE EQUAL 1)
 list (APPEND SRCS ${ETHERNET_SOURCE})

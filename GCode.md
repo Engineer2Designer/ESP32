@@ -16,7 +16,7 @@
 - G92: 設定暫時座標偏移 (非持久)。
 - G92.1: 清除 G92 偏移。
 
-### Additional Non-Modal Commands
+### Additional Non-Modal Commands（附加非模態指令）
 
 - G10 L1*: 設定工具表偏移為指定數值 (如刀長/半徑)。
 - G10 L10*: 以目前位置計算並設定工具偏移。

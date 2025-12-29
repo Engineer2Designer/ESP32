@@ -35,7 +35,7 @@
 	url = https://github.com/grblHAL/Plugin_embroidery
 [submodule "main/plugins"]
 	path = main/plugins
-	url = https://github.com/Engineer2Designer/plugins
+	url = https://github.com/Engineer2Designer/plugins-private
 	branch = e2d-atc_T1.4
 [submodule "main/openpnp"]
 	path = main/openpnp

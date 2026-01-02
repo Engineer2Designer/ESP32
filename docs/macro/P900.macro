@@ -1,0 +1,9 @@
+(P900 reset defaults after $RST=*)
+(ASCII only; run after homing)
+G90
+G53 G0 Z-1.0
+G53 G0 X-117.0 Y-190.0 Z-2.0
+G28.1
+G53 G0 X-230.0 Y-190.0 Z-2.0
+G30.1
+G10 L2 P9 X-50.0 Y-5.0 Z-20.0

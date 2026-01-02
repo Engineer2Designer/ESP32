@@ -1,0 +1,5 @@
+# AGENTS.md
+
+<INSTRUCTIONS>
+- 後續回覆請使用中文。
+</INSTRUCTIONS>

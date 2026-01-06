@@ -30,9 +30,9 @@
 //#define BOARD_PROTONEER_3XX           //
 //#define BOARD_FYSETC_E4               //
 //#define BOARD_XPRO_V5                 //
-//#define BOARD_MKS_DLC32_V2P0          //
+#define BOARD_MKS_DLC32_V2P0          //
 //#define BOARD_MKS_DLC32_MAX_V1        // Has a ESP32-S3 MCU
-#define BOARD_MKS_TINYBEE_V1          //
+//#define BOARD_MKS_TINYBEE_V1          //
 //#define BOARD_CNC3040                 //
 //#define BOARD_BLACKBOX_X32            // NOTE: Enable in CMakeLists.txt to set board specific defaults for the core!
 //#define BOARD_ROOTCNC_V2              //
@@ -72,17 +72,19 @@
 #define WIFI_SOFTAP               1 // Use Soft AP mode for WiFi.
 //#define ETHERNET_ENABLE         1 // Ethernet streaming. Uses networking plugin.
 //#define BLUETOOTH_ENABLE        1 // Set to 1 for native radio, 2 for HC-05 module.
-#define SDCARD_ENABLE             2 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
-//#define LITTLEFS_ENABLE         1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
-//#define MPG_ENABLE              1 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
+#define SDCARD_ENABLE             1 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
+#define LITTLEFS_ENABLE           1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
+#define MPG_ENABLE                1 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
                                     // 1: Mode switching is by handshake pin.
                                     // 2: Mode switching is by the CMD_MPG_ENABLE_TOGGLE (0x8B) command character.
 //#define KEYPAD_ENABLE           1 // 1: uses a I2C keypad for input.
                                     // 2: uses a serial stream for input. If MPG_ENABLE is set > 0 the serial stream is shared with the MPG.
-//#define DISPLAY_ENABLE          9 // Set to 9 for I2C display protocol, 17 for I2C LED protocol. Other options may be available via plugins.
-//#define MACROS_ENABLE           0 // Macros plugin. For macros that can be triggered by keypad plugin or auxiliary inputs.
+//#define DISPLAY_ENABLE           33 // DISPLAY_I2C_OLED_1
+//#define DISPLAY_DRIVER            2 //DISPLAY_DRIVER_SSD1306
+
+#define MACROS_ENABLE             1 // Macros plugin. For macros that can be triggered by keypad plugin or auxiliary inputs.
                                     // Set to 1 for aux input triggers, 2 for keypad triggers or 3 for both.
-//#define N_MACROS                3 // Number of macros to enable, max 8. If commented out default is 4 when triggered by aux inputs, 8 otherwise.
+#define N_MACROS                  1 // Number of macros to enable, max 8. If commented out default is 4 when triggered by aux input -s, 8 otherwise.
 //#define LASER_COOLANT_ENABLE    1 // Laser coolant plugin. To be completed.
 //#define LB_CLUSTERS_ENABLE      1 // LaserBurn cluster support.
 //#define LASER_OVD_ENABLE        1
@@ -96,7 +98,7 @@
 //#define TRINAMIC_DEV            1 // Development mode, adds a few M-codes to aid debugging. Do not enable in production code.
 //#define EEPROM_ENABLE          16 // I2C EEPROM/FRAM support. Set to 16 for 2K, 32 for 4K, 64 for 8K, 128 for 16K and 256 for 16K capacity.
 //#define EEPROM_IS_FRAM          1 // Uncomment when EEPROM is enabled and chip is FRAM, this to remove write delay.
-//#define ESTOP_ENABLE            0 // When enabled only real-time report requests will be executed when the reset pin is asserted.
+#define ESTOP_ENABLE              0 // When enabled only real-time report requests will be executed when the reset pin is asserted.
                                     // NOTE: if left commented out the default setting is determined from COMPATIBILITY_LEVEL.
 #define RGB_LED_ENABLE            2 // Set to 1 to enable strip length settings $536 and $537, set to 2 to also enable M150 LED strip control.
 #define STATUS_LIGHT_ENABLE       1 // Enable status light control via AUXOUTPUT pins and M150 command.

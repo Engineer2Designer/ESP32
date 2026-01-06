@@ -27,8 +27,8 @@
 #endif
 
 // Plugin OLED Display
-#if DISPLAY_ENABLE == 9
-extern void plugin_display_init(void);
+#if DISPLAY_ENABLE == 33
+extern void display_init(void);
 #endif
 
 // Initialize user plugins
@@ -38,8 +38,8 @@ void my_plugin_init (void)
     e2d_atc_init();
 #endif
 
-#if DISPLAY_ENABLE == 9
-    plugin_display_init();
+#if DISPLAY_ENABLE == 33
+    display_init();
 #endif
 
     // Add more user plugins here as needed

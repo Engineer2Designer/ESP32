@@ -62,5 +62,5 @@ void app_main(void)
             ret = nvs_flash_init();
     }
 
-    xTaskCreatePinnedToCore(vGrblTask, "grblHAL", 8128, NULL, GRBLHAL_TASK_PRIORITY, NULL, GRBLHAL_TASK_CORE);
+    xTaskCreatePinnedToCore(vGrblTask, "grblHAL", 16384, NULL, GRBLHAL_TASK_PRIORITY, NULL, GRBLHAL_TASK_CORE);
 }

@@ -75,20 +75,18 @@
 #error "Board BOARD_MKS_DLC32_V2P0 does not have support for ABC Motors"
 #endif
 
-#define AUXOUTPUT0_PIN          GPIO_NUM_25 // EXP_1,7 (LCD_CS_0)
-#if PWM_SERVO_ENABLE || (SPINDLE_ENABLE & ((1<<SPINDLE_PWM2)|(1<<SPINDLE_PWM2_NODIR)))
-#define AUXOUTPUT0_PWM_PIN      GPIO_NUM_26 // EXP_1,5 (LCD_TOUCH_CS_0)
-#else
+//#define AUXOUTPUT0_PIN          GPIO_NUM_25 // EXP_1,7 (LCD_CS_0)
+
 #define AUXOUTPUT1_PIN          GPIO_NUM_26 // EXP_1,5 (LCD_TOUCH_CS_0)
-#endif
 #define AUXOUTPUT2_PIN          GPIO_NUM_27 // EXP_1,4 (LCD_RST_0)
 #define AUXOUTPUT3_PIN          GPIO_NUM_32 // LC
 #define AUXOUTPUT4_PIN          GPIO_NUM_5  //  EXP_1,3 (LCD_EN_0)
 
 // Define driver spindle pins
-#if DRIVER_SPINDLE_ENABLE & (SPINDLE_ENA|SPINDLE_PWM)
+#if DRIVER_SPINDLE_ENABLE & (SPINDLE_ENA|SPINDLE_PWM|SPINDLE_DIR)
 #define SPINDLE_PWM_PIN         AUXOUTPUT3_PIN
 #define SPINDLE_ENABLE_PIN      AUXOUTPUT2_PIN
+#define SPINDLE_DIRECTION_PIN   AUXOUTPUT1_PIN
 #elif DRIVER_SPINDLE_ENABLE & (SPINDLE_ENA|SPINDLE_DIR)
 #define SPINDLE_ENABLE_PIN      AUXOUTPUT3_PIN
 #define SPINDLE_DIRECTION_PIN   AUXOUTPUT2_PIN
@@ -96,14 +94,8 @@
 #define SPINDLE_ENABLE_PIN      AUXOUTPUT3_PIN
 #endif
 
-#if DRIVER_SPINDLE1_ENABLE & (SPINDLE_ENA|SPINDLE_PWM)
-#define SPINDLE1_PWM_PIN         AUXOUTPUT0_PIN
-#define SPINDLE1_ENABLE_PIN      AUXOUTPUT1_PIN
-#elif DRIVER_SPINDLE1_ENABLE & (SPINDLE_ENA|SPINDLE_DIR)
-#define SPINDLE1_ENABLE_PIN      AUXOUTPUT1_PIN
-#define SPINDLE1_DIRECTION_PIN   AUXOUTPUT0_PIN
-#elif DRIVER_SPINDLE1_ENABLE & SPINDLE_ENA
-#define SPINDLE1_ENABLE_PIN      AUXOUTPUT1_PIN
+#if RGB_LED_ENABLE
+#define LED_PIN                 GPIO_NUM_25 
 #endif
 
 // Define flood and mist coolant enable output pins.
@@ -114,14 +106,12 @@
 #define COOLANT_MIST_PIN    I2SO(7)     // Beeper
 #endif
 
-#define AUXINPUT0_PIN       GPIO_NUM_33 // EXP_1,8 (LCD_RS)
+#define AUXINPUT0_PIN       GPIO_NUM_23 // EXP_1,8 (LCD_RS)
 #define AUXINPUT1_PIN       GPIO_NUM_22
-#if !I2C_ENABLE
-#define AUXINPUT2_PIN       GPIO_NUM_4 // Cycle start  // J2,4 (I2C_SCL)
-#endif
+#define AUXINPUT2_PIN       GPIO_NUM_33 // Cycle start  // J2,4 (I2C_SCL)
 
 // Define user-control controls (cycle start, reset, feed hold) input pins.
-#if (CONTROL_ENABLE & CONTROL_CYCLE_START) && defined(AUXINPUT2_PIN)
+#if (CONTROL_ENABLE & CONTROL_CYCLE_START)
 #define CYCLE_START_PIN         AUXINPUT2_PIN
 #endif
 
@@ -139,7 +129,7 @@
 #endif
 
 #if MPG_ENABLE == 1
-// Use GPIO33 (EXP1) for MPG_MODE.
+// Use GPIO23 (EXP1) for MPG_MODE.
 // MPG UART is IO18/19 (EXP2).
 #define MPG_MODE_PIN            AUXINPUT0_PIN
 #endif

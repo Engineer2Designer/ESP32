@@ -2542,9 +2542,13 @@ static void settings_changed (settings_t *settings, settings_changed_flags_t cha
         static bool bluetooth_ok = false;
         if(!bluetooth_ok)
             bluetooth_ok = bluetooth_start_local();
+  #ifndef MPG_BAUD
+  #define MPG_BAUD 115200
+  #endif
+
   #if MPG_ENABLE == 2 && MPG_STREAM == 20
 		if(bluetooth_ok && !hal.driver_cap.mpg_mode)
-			hal.driver_cap.mpg_mode = stream_mpg_register(stream_open_instance(MPG_STREAM, 115200, NULL, NULL), false, stream_mpg_check_enable);
+			hal.driver_cap.mpg_mode = stream_mpg_register(stream_open_instance(MPG_STREAM, MPG_BAUD, NULL, NULL), false, stream_mpg_check_enable);
   #endif
 #endif
 
@@ -3702,12 +3706,12 @@ bool driver_init (void)
 
 #if MPG_ENABLE == 1
     if(!hal.driver_cap.mpg_mode)
-        hal.driver_cap.mpg_mode = stream_mpg_register(stream_open_instance(MPG_STREAM, 115200, NULL, "MPG"), MPG_SHARE_TX, NULL);
+        hal.driver_cap.mpg_mode = stream_mpg_register(stream_open_instance(MPG_STREAM, MPG_BAUD, NULL, "MPG"), MPG_SHARE_TX, NULL);
     if(hal.driver_cap.mpg_mode)
         task_run_on_startup(mpg_enable, NULL);
 #elif MPG_ENABLE == 2
     if(!hal.driver_cap.mpg_mode)
-        hal.driver_cap.mpg_mode = stream_mpg_register(stream_open_instance(MPG_STREAM, 115200, NULL, "MPG"), MPG_SHARE_TX, stream_mpg_check_enable);
+        hal.driver_cap.mpg_mode = stream_mpg_register(stream_open_instance(MPG_STREAM, MPG_BAUD, NULL, "MPG"), MPG_SHARE_TX, stream_mpg_check_enable);
 #endif
 
     // no need to move version check before init - compiler will fail any mismatch for existing entries

@@ -77,6 +77,7 @@
 #define MPG_ENABLE                1 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
                                     // 1: Mode switching is by handshake pin.
                                     // 2: Mode switching is by the CMD_MPG_ENABLE_TOGGLE (0x8B) command character.
+#define MPG_BAUD             1000000 // MPG UART baud rate
 //#define KEYPAD_ENABLE           1 // 1: uses a I2C keypad for input.
                                     // 2: uses a serial stream for input. If MPG_ENABLE is set > 0 the serial stream is shared with the MPG.
 //#define DISPLAY_ENABLE           33 // DISPLAY_I2C_OLED_1

@@ -72,7 +72,7 @@
 #define WIFI_SOFTAP               1 // Use Soft AP mode for WiFi.
 //#define ETHERNET_ENABLE         1 // Ethernet streaming. Uses networking plugin.
 //#define BLUETOOTH_ENABLE        1 // Set to 1 for native radio, 2 for HC-05 module.
-#define SDCARD_ENABLE             1 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
+#define SDCARD_ENABLE             2 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
 #define LITTLEFS_ENABLE           1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
 #define MPG_ENABLE                1 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
                                     // 1: Mode switching is by handshake pin.

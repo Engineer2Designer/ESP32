@@ -1,6 +1,7 @@
 [submodule "main/grbl"]
 	path = main/grbl
-	url = https://github.com/grblHAL/core
+	url = https://github.com/Engineer2Designer/core
+	branch = DLC32_V1.1
 [submodule "main/eeprom"]
 	path = main/eeprom
 	url = https://github.com/grblHAL/Plugin_EEPROM
@@ -33,7 +34,8 @@
 	url = https://github.com/grblHAL/Plugin_embroidery
 [submodule "main/plugins"]
 	path = main/plugins
-	url = https://github.com/grblHAL/Plugins_misc/
+	url = https://github.com/Engineer2Designer/plugins-private
+	branch = DLC32_V1.1
 [submodule "main/openpnp"]
 	path = main/openpnp
 	url = https://github.com/grblHAL/Plugin_OpenPNP/

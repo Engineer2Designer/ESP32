@@ -227,6 +227,8 @@ set(MISC_PLUGINS_SOURCE
  plugins/pwm_servo_m280.c
  plugins/rgb_led_m150.c
  plugins/tooltable.c
+ plugins/Plugin_status_light/status_light.c
+ plugins/Plugin-e2d_atc/e2d_atc.c
 )
 
 set(EMBROIDERY_SOURCE

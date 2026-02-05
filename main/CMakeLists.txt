@@ -179,6 +179,7 @@ set(NETWORKING_SOURCE
  networking/multipartparser.c
  networking/networking.c
  networking/fs_ram.c
+ networking/fs_stream.c
  networking/etag.c
  networking/webdav.c
  networking/ssdp.c

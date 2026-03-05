@@ -162,21 +162,21 @@ n_pieces = 4 # Number of line segments used for data fit. Only 1 to 4 line segme
 # value and end with the maximum useful PWM or 'S' programmed value. Order of the array must
 # be synced with the RPM_measured array below. 
 # NOTE: ** DO NOT USE DATA FROM AN EXISTING PIECEWISE LINE FIT. USE DEFAULT GRBL MODEL ONLY. **
-PWM_set = np.array([2000,2200,2400,2600,2800,3000,3200,3400,3600,3800,4000,4200,4500,4800,5100,5400,5700,6000,6400,6800,7200,7600,8000,8500,9000,9500,10000,10500,11000,11500,12000], dtype=float)
+PWM_set = np.array([500,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000], dtype=float)
 
 # Actual RPM measured at the spindle. Must be in the ascending value and equal in length 
 # as the PWM_set array. Must include the min and max measured rpm output in the first and 
 # last array entries, respectively.
-RPM_measured = np.array([485,604,885,1118,1350,1580,1835,2070,2280,2550,2800,3060,3500,4100,4520,4980,5650,6200,6850,7500,8200,8500,9070,9860,10350,10790,11000,11500,11700,12000,12400], dtype=float)
+RPM_measured = np.array([870,1340,2270,3420,4580,6100,7400,8500,9700,10400,10770,11400,11920], dtype=float)
 
 # Configure line fit points by 'S' programmed rpm or PWM value. Values must be between 
 # PWM_max and PWM_min. Typically, alter these values to space the points evenly between 
 # max and min PWM range. However, they may be tweaked to maximize accuracy in the places 
 # you normally operate for highly nonlinear curves. Plot to visually assess how well the 
 # solution fits the data.
-PWM_point1 = 3500.0 # (S) Point between segments 0 and 1. Used when n_pieces >= 2.
-PWM_point2 = 6500.0  # (S) Point between segments 1 and 2. Used when n_pieces >= 3.
-PWM_point3 = 9500.0  # (S) Point between segments 2 and 3. Used when n_pieces = 4.
+PWM_point1 = 3000.0 # (S) Point between segments 0 and 1. Used when n_pieces >= 2.
+PWM_point2 = 6000.0  # (S) Point between segments 1 and 2. Used when n_pieces >= 3.
+PWM_point3 = 9000.0  # (S) Point between segments 2 and 3. Used when n_pieces = 4.
 
 # ----------------------------------------------------------------------------------------
 
@@ -330,12 +330,16 @@ if n_pieces > 3:
 print("\n[To operate over full model range, manually write these]")
 print("['$' settings or alter values in defaults.h. Grbl will]")
 print("[operate between min($30,RPM_MAX) and max($31,RPM_MIN)]")
+print("[grblHAL note: with spindle linearization enabled, keep $31=0]")
 print("$30=%.1f (rpm max)" % rpm[-1])
 print("$31=%.1f (rpm min)" % rpm[0])
 print("$66=%.6e,%.6e,%.6e (piece 1)" % (rpm[0], (1./a[0]), (b[0]/a[0])))
-print("$67=%.6e,%.6e,%.6e (piece 2)" % (rpm[1], (1./a[1]), (b[1]/a[1])))
-print("$68=%.6e,%.6e,%.6e (piece 3)" % (rpm[2], (1./a[2]), (b[0]/a[2])))
-print("$69=%.6e,%.6e,%.6e (piece 4)" % (rpm[3], (1./a[2]), (b[0]/a[2])))
+if n_pieces > 1:
+  print("$67=%.6e,%.6e,%.6e (piece 2)" % (rpm[1], (1./a[1]), (b[1]/a[1])))
+if n_pieces > 2:
+  print("$68=%.6e,%.6e,%.6e (piece 3)" % (rpm[2], (1./a[2]), (b[2]/a[2])))
+if n_pieces > 3:
+  print("$69=%.6e,%.6e,%.6e (piece 4)" % (rpm[3], (1./a[3]), (b[3]/a[3])))
 
 if (PWM_min > 1)|(PWM_max<255):
   print("\n[Update the following #define values in cpu_map.h]")

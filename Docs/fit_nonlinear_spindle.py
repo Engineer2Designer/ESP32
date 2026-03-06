@@ -170,7 +170,7 @@ n_pieces = 4 # Number of line segments used for data fit. Only 1 to 4 line segme
 # ENABLE_SPINDLE_LINEARIZATION 0
 # DEFAULT_SPINDLE_RPM_MAX 12000.0f // rpm - Updated from spindle linearization fit
 # DEFAULT_SPINDLE_RPM_MIN 2000.0f // rpm - Must be 0 for spindle linearization to work correctly
-# DEFAULT_SPINDLE_PWM_MIN_VALUE 16.667f // Percent (2000/12000*100). Updated from spindle linearization fit
+# DEFAULT_SPINDLE_PWM_MIN_VALUE 0.0f // Percent (2000/12000*100). Updated from spindle linearization fit
 
 
 # Programmed 'S' spindle speed values. Must start with minimum useful PWM or 'S' programm ed
@@ -178,7 +178,7 @@ n_pieces = 4 # Number of line segments used for data fit. Only 1 to 4 line segme
 # be synced with the RPM_measured array below. 
 # NOTE: ** DO NOT USE DATA FROM AN EXISTING PIECEWISE LINE FIT. USE DEFAULT GRBL MODEL ONLY. **
 PWM_set = np.array([
-    2000,2200,2500,2800,3200,3600,4000,4500,5000,6000,7000,8000,9000,10000,11000,12000
+    2000,2100,2200,2300,2400,2500,2700,3000,3300,3600,4000,5000,6000,7000,8000,9000,10000,11000,12000,12436
 ], dtype=float)
 
 # Actual RPM measured at the spindle. Must be in the ascending value and equal in length 
@@ -186,7 +186,7 @@ PWM_set = np.array([
 # last array entries, respectively.
 # Tip: if S100~S2000 all read ~480RPM, that is likely $31/$35 clamping behavior.
 # 提示：若 S100~S2000 都約 480RPM，通常是 $31/$35 低速夾住，不是量測器故障。
-RPM_measured = np.array([473,610,1020,1350,1810,2310,2785,3530,4380,6100,7870,9280,10250,11050,11800,12450], dtype=float)
+RPM_measured = np.array([490,493,522,678,800,916,1158,1507,1809,2160,2691,4100,5800,7510,8940,10000,10860,11580,12230,12480], dtype=float)
 
 # Configure line fit points by 'S' programmed rpm or PWM value. Values must be between 
 # PWM_max and PWM_min. Typically, alter these values to space the points evenly between 
@@ -194,8 +194,8 @@ RPM_measured = np.array([473,610,1020,1350,1810,2310,2785,3530,4380,6100,7870,92
 # you normally operate for highly nonlinear curves. Plot to visually assess how well the 
 # solution fits the data.
 PWM_point1 = 3000.0 # (S) Point between segments 0 and 1. Used when n_pieces >= 2.
-PWM_point2 = 6000.0  # (S) Point between segments 1 and 2. Used when n_pieces >= 3.
-PWM_point3 = 9000.0  # (S) Point between segments 2 and 3. Used when n_pieces = 4.
+PWM_point2 = 5000.0  # (S) Point between segments 1 and 2. Used when n_pieces >= 3.
+PWM_point3 = 8500.0  # (S) Point between segments 2 and 3. Used when n_pieces = 4.
 
 # ----------------------------------------------------------------------------------------
 

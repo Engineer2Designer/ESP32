@@ -158,16 +158,35 @@ import numpy as np
 
 n_pieces = 4 # Number of line segments used for data fit. Only 1 to 4 line segments supported.
 
+# Measurement notes (EN + 中文):
+# 1) Measure RPM_measured with spindle linearization disabled.
+#    請在「關閉主軸線性化」時量測 RPM_measured（ENABLE_SPINDLE_LINEARIZATION = 0）。
+# 2) In grblHAL, 0 < S <= $31 maps to minimum PWM ($35), so RPM may be "flat" in low S range.
+#    在 grblHAL 中，0 < S <= $31 會被夾到最小 PWM（$35），因此低 S 區段可能轉速都一樣。
+# 3) If spindle starts around S=2000, set $31 and $35 to match that minimum useful speed for data capture.
+#    若主軸約從 S=2000 才起轉，量測時建議把 $31/$35 對齊到該最小有效點。
+# 4) Keep PWM_set and RPM_measured strictly paired and monotonic.
+#    PWM_set 與 RPM_measured 必須一一對應，且整體遞增。
+# ENABLE_SPINDLE_LINEARIZATION 0
+# DEFAULT_SPINDLE_RPM_MAX 12000.0f // rpm - Updated from spindle linearization fit
+# DEFAULT_SPINDLE_RPM_MIN 2000.0f // rpm - Must be 0 for spindle linearization to work correctly
+# DEFAULT_SPINDLE_PWM_MIN_VALUE 16.667f // Percent (2000/12000*100). Updated from spindle linearization fit
+
+
 # Programmed 'S' spindle speed values. Must start with minimum useful PWM or 'S' programm ed
 # value and end with the maximum useful PWM or 'S' programmed value. Order of the array must
 # be synced with the RPM_measured array below. 
 # NOTE: ** DO NOT USE DATA FROM AN EXISTING PIECEWISE LINE FIT. USE DEFAULT GRBL MODEL ONLY. **
-PWM_set = np.array([500,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000], dtype=float)
+PWM_set = np.array([
+    2000,2200,2500,2800,3200,3600,4000,4500,5000,6000,7000,8000,9000,10000,11000,12000
+], dtype=float)
 
 # Actual RPM measured at the spindle. Must be in the ascending value and equal in length 
 # as the PWM_set array. Must include the min and max measured rpm output in the first and 
 # last array entries, respectively.
-RPM_measured = np.array([870,1340,2270,3420,4580,6100,7400,8500,9700,10400,10770,11400,11920], dtype=float)
+# Tip: if S100~S2000 all read ~480RPM, that is likely $31/$35 clamping behavior.
+# 提示：若 S100~S2000 都約 480RPM，通常是 $31/$35 低速夾住，不是量測器故障。
+RPM_measured = np.array([473,610,1020,1350,1810,2310,2785,3530,4380,6100,7870,9280,10250,11050,11800,12450], dtype=float)
 
 # Configure line fit points by 'S' programmed rpm or PWM value. Values must be between 
 # PWM_max and PWM_min. Typically, alter these values to space the points evenly between 
@@ -255,7 +274,7 @@ if n_pieces == 1:
   a = [p[1]]
   b = [ p[0]-p[1]*PWM_min]
   rpm = [ p[0],
-          p[0]+p[1]*(PWM_point1-PWM_min)]
+          p[0]+p[1]*(PWM_max-PWM_min)]
 
 elif n_pieces == 2:
   piece_func = piecewise_linear_2

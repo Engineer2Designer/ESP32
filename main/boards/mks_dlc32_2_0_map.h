@@ -33,6 +33,10 @@
 
 #define AUX_CONTROLS_OUT
 
+// Override ESP32 UART0 defaults so $pins reports the actual primary UART pins.
+#define UART_RX_PIN         GPIO_NUM_3
+#define UART_TX_PIN         GPIO_NUM_1
+
 #ifdef ADD_SERIAL1
 #define SERIAL1_PORT
 #define UART1_RX_PIN        GPIO_NUM_18
